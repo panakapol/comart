@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สรุปแนวข้อสอบ Computer Organization</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Sarabun', 'Segoe UI', sans-serif;
+    background: #f0f4f8;
+    color: #1a1a2e;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .cover {
+    background: linear-gradient(135deg, #1a1a6e 0%, #2d6a9f 50%, #16a085 100%);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -30px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .cover .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .cover h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  .cover h2 {
+    font-size: 20px;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: 25px;
+  }
+
+  .cover .tag-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cover .tag {
+    background: rgba(255,255,255,0.15);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .toc {
+    background: white;
+    border-radius: 16px;
+    padding: 30px 35px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-left: 5px solid #2d6a9f;
+  }
+
+  .toc h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d6a9f;
+    margin-bottom: 16px;
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+
+  .toc ol li {
+    counter-increment: toc;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #444;
+  }
+
+  .toc ol li::before {
+    content: counter(toc);
+    background: #2d6a9f;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .section {
+    background: white;
+    border-radius: 16px;
+    padding: 35px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    page-break-inside: avoid;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f0f4f8;
+  }
+
+  .section-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .q1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+  .q2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  .q3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .q4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+  .q5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+  .q6 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+  .q7 { background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #7a4a2a !important; }
+  .q8 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); color: #2a3a6a !important; }
+
+  .section-header-text h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+
+  .section-header-text .sub {
+    font-size: 13px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .sub-question {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    border-left: 3px solid #2d6a9f;
+  }
+
+  .sub-question .sq-label {
+    font-weight: 700;
+    color: #2d6a9f;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .sub-question p {
+    color: #333;
+    font-size: 14.5px;
+  }
+
+  .formula-box {
+    background: linear-gradient(135deg, #1a1a6e08, #2d6a9f15);
+    border: 1.5px solid #2d6a9f40;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #1a3a6e;
+    font-weight: 600;
+  }
+
+  .tip-box {
+    background: #fff8e7;
+    border: 1.5px solid #f59e0b;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .tip-box .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .tip-box p { font-size: 13.5px; color: #7a4a00; }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .concept-card {
+    background: #f0f4ff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-top: 3px solid #667eea;
+  }
+
+  .concept-card .label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .concept-card p {
+    font-size: 13.5px;
+    color: #333;
+  }
+
+  .step-list {
+    list-style: none;
+    counter-reset: steps;
+  }
+
+  .step-list li {
+    counter-increment: steps;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+
+  .step-list li::before {
+    content: counter(steps);
+    background: #16a085;
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-list li span { font-size: 14px; color: #333; }
+
+  .code-block {
+    background: #1a1a2e;
+    color: #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 10px 0;
+    overflow-x: auto;
+  }
+
+  .code-block .kw { color: #81a1ff; }
+  .code-block .cm { color: #6b8a6b; }
+  .code-block .var { color: #f0c674; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13.5px;
+  }
+
+  th {
+    background: #2d6a9f;
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #e8edf5;
+    color: #333;
+  }
+
+  tr:nth-child(even) td { background: #f8fafc; }
+
+  .highlight { color: #e74c3c; font-weight: 700; }
+  .green { color: #16a085; font-weight: 700; }
+
+  .tag-chip {
+    display: inline-block;
+    background: #e8f0fe;
+    color: #2d6a9f;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 2px 3px;
+  }
+
+  .footer {
+    text-align: center;
+    color: #aaa;
+    font-size: 13px;
+    padding: 30px;
+    border-top: 1px solid #e8edf5;
+    margin-top: 20px;
+  }
+
+  @media print {
+    body { background: white; }
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section { box-shadow: none; border: 1px solid #e0e0e0; }
+    .section-num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="badge">📘 สรุปแนวข้อสอบ</div>
+  <h1>Computer Organization</h1>
+  <h2>แนวข้อสอบ 100% · ครบทุกข้อ ·  อ่านง่าย</h2>
+  <div class="tag-row">
+    <div class="tag">🖥️ CPU Architecture</div>
+    <div class="tag">⚙️ Pipelining</div>
+    <div class="tag">💾 Memory Reference</div>
+    <div class="tag">🔢 Assembly</div>
+    <div class="tag">📐 Prefix / Postfix</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOC -->
+  <div class="toc">
+    <h3>📋 สารบัญแนวข้อสอบทั้งหมด 7–8 ข้อ</h3>
+    <ol>
+      <li>โครงสร้าง Instruction Format (32 bits / 1 คำ)</li>
+      <li>Register & AR — ตัวโหนดเกี่ยวกับ Register</li>
+      <li>Microoperations — อธิบายการทำงานของ LDA / ADD</li>
+      <li>Prefix Expression — แปลงเป็นสมการทั่วไป</li>
+      <li>Boolean / ลอจิกลด — Boolean Algebra</li>
+      <li>Pipeline — D[i] = A[i]*B[i] + A[i]*C[i]</li>
+      <li>Assembly Language — เขียน / แปลงโค้ด</li>
+      <li>Hazards ใน Pipeline (เนื้อหาเพิ่มเติม)</li>
+    </ol>
+  </div>
+
+  <!-- Q1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num q1">1</div>
+      <div class="section-header-text">
+        <h3>Instruction Format — 32 bits ต่อ 1 คำ (Word)</h3>
+        <div class="sub">โครงสร้าง OP-Code, Register, Address</div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="icon">💡</div>
+      <p>โจทย์จะให้ว่า "มี 32 bits ต่อ 1 คำ" แล้วถามว่า OP-Code มีกี่ bit / Register มีกี่ bit / เกี่ยวกับ bit ต่างๆ</p>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">1.1) OP-Code มีกี่ bit?</div>
+      <p>ดูจาก Instruction Format — ส่วน OP-Code คือบิตแรกของ instruction<br>
+      ถ้า format = <strong>Opcode (4 bit) | Mode (1 bit) | Address (11 bit)</strong> รวม = 16 bit<br>
+      สำหรับ 32-bit word ต้องดูจาก diagram ที่ให้มาในโจทย์</p>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">1.2) Register มีกี่ bit?</div>
+      <p>Register field = บิตที่ใช้ระบุตัว register (เช่น R0–R7 ต้องการ 3 bit)</p>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">1.3) เกี่ยวกับ bit ต่างๆ (วาดรูปเบอะ)</div>
+      <p>โจทย์อาจให้วาด Instruction Format diagram แสดง field ต่างๆ เช่น:</p>
+      <div class="formula-box">| OP-Code | I (Indirect) | Register | Address |</div>
+      <p>เลข bit ในแต่ละ field รวมกันต้องได้ 32 bits เสมอ</p>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">1.4) จำนวน / 1.5) อื่นๆ</div>
+      <p>อาจถามจำนวน instruction สูงสุดที่เป็นไปได้ = 2<sup>n</sup> (n = จำนวน bit ของ OP-Code)</p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="label">OP-Code</div>
+        <p>ระบุประเภทของคำสั่ง เช่น ADD, LDA, STA<br>ถ้า n bit → มีได้ 2<sup>n</sup> คำสั่ง</p>
+      </div>
+      <div class="concept-card">
+        <div class="label">Address Field</div>
+        <p>ระบุตำแหน่งหน่วยความจำที่จะเข้าถึง<br>เช่น 12 bit → address space = 2<sup>12</sup> = 4096</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num q2">2</div>
+      <div class="section-header-text">
+        <h3>Register & AR (Address Register)</h3>
+        <div class="sub">ตัวโหนดเกี่ยวกับ Register ในระบบ Common Bus</div>
+      </div>
+    </div>
+
+    <p style="margin-bottom:14px;">AR คือ <strong>Address Register</strong> — ใช้เก็บ <span class="highlight">ที่อยู่ (Address)</span> ของหน่วยความจำที่จะอ่าน/เขียน</p>
+
+    <table>
+      <tr><th>Register</th><th>ชื่อเต็ม</th><th>หน้าที่</th></tr>
+      <tr><td><strong>AR</strong></td><td>Address Register</td><td>เก็บ address ของ memory ที่จะเข้าถึง</td></tr>
+      <tr><td><strong>PC</strong></td><td>Program Counter</td><td>เก็บ address ของ instruction ถัดไป</td></tr>
+      <tr><td><strong>IR</strong></td><td>Instruction Register</td><td>เก็บ instruction ที่กำลัง execute</td></tr>
+      <tr><td><strong>DR</strong></td><td>Data Register</td><td>เก็บข้อมูลที่อ่านมาจาก memory</td></tr>
+      <tr><td><strong>AC</strong></td><td>Accumulator</td><td>เก็บผลลัพธ์ของการคำนวณ ALU</td></tr>
+      <tr><td><strong>TR</strong></td><td>Temporary Register</td><td>เก็บข้อมูลชั่วคราว</td></tr>
+    </table>
+
+    <div class="tip-box">
+      <div class="icon">🔑</div>
+      <p><strong>AR ดูที่ติ๊กไว้</strong> — AR มี input จาก: PC (ตอน Fetch), DR[0-11] (ตอน Indirect), และ IR[0-11] (ตอน Decode)<br>
+      การที่ AR จะโหลดค่าได้ต้องมีสัญญาณ <strong>L (Load)</strong> และ clock อยู่ในสภาวะที่ถูกต้อง</p>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">โจทย์อาจถาม: AR โหลดค่าเมื่อไหร่?</div>
+      <p>ดูจาก Microoperations:<br>
+      • <strong>R₀T₁</strong>: AR ← PC (ตอน Fetch)<br>
+      • <strong>R₀T₂</strong>: AR ← 0, TR ← PC (ตอน Interrupt)<br>
+      • <strong>D₅T₃</strong> (Indirect): AR ← M[AR] (ถ้า I=1)<br>
+      สัญญาณที่ทำให้ AR load = R₀T₁ <strong>OR</strong> D₅T₃ <strong>OR</strong> T₄ (...)
+      </p>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num q3" style="color:#1a3a5a;">3</div>
+      <div class="section-header-text">
+        <h3>Microoperations — LDA / ADD</h3>
+        <div class="sub">อธิบายว่าเกิดอะไรขึ้นในแต่ละ cycle</div>
+      </div>
+    </div>
+
+    <p style="margin-bottom:14px;">โจทย์จะให้ sequence ของ microoperation แล้วถามว่า "อธิบายว่าเกิดอะไรขึ้น"</p>
+
+    <div class="sub-question">
+      <div class="sq-label">Fetch Cycle (ทุก Instruction เริ่มที่นี่)</div>
+      <div class="formula-box">
+        T₀: AR ← PC<br>
+        T₁: IR ← M[AR], PC ← PC + 1<br>
+        T₂: AR ← IR[0-11], I ← IR[15], Decode IR[12-14]
+      </div>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">LDA (Load to Accumulator) — D₂</div>
+      <div class="formula-box">
+        D₂T₄: DR ← M[AR]<br>
+        D₂T₅: AC ← DR, SC ← 0
+      </div>
+      <p>คือ: อ่านค่าจาก memory มาเก็บที่ DR แล้วโอนไป AC</p>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">ADD — D₁</div>
+      <div class="formula-box">
+        D₁T₄: DR ← M[AR]<br>
+        D₁T₅: AC ← AC + DR, E ← C<sub>out</sub>, SC ← 0
+      </div>
+      <p>คือ: อ่านค่าจาก memory → บวกกับ AC → ผลลัพธ์เก็บที่ AC, carry เก็บที่ E</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="icon">⚠️</div>
+      <p>SC ← 0 หมายถึง Sequence Counter รีเซ็ต = จบ cycle นั้น กลับไปเริ่ม Fetch ใหม่</p>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num q4" style="color:#1a3a2a;">4</div>
+      <div class="section-header-text">
+        <h3>Prefix Expression → สมการทั่วไป</h3>
+        <div class="sub">3-Address / แปลง Prefix เป็น Infix</div>
+      </div>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">วิธีแปลง Prefix → Infix</div>
+      <ul class="step-list">
+        <li><span>อ่าน Prefix จากซ้ายไปขวา</span></li>
+        <li><span>พบ Operand → push ลง stack</span></li>
+        <li><span>พบ Operator → pop 2 ค่าจาก stack, สร้าง (op1 operator op2), push กลับ</span></li>
+        <li><span>ทำซ้ำจนหมด → ผลใน stack คือคำตอบ</span></li>
+      </ul>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">ตัวอย่าง: + A * B C → Infix</div>
+      <div class="formula-box">
+        Prefix: + A * B C<br>
+        อ่านจากขวา: C, B, * → (B * C)<br>
+        ต่อ: A, + → (A + (B * C))<br>
+        <strong>Infix: A + B * C</strong>
+      </div>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">โจทย์จากเล่ม: ((A + B) + C) XOR ...</div>
+      <p>ต้องแปลงจาก Prefix กลับเป็น Infix พร้อมใส่วงเล็บให้ถูกต้องตาม precedence</p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="label">Prefix (Polish)</div>
+        <p>Operator นำหน้า Operand<br>เช่น + A B = A + B</p>
+      </div>
+      <div class="concept-card">
+        <div class="label">Postfix (Reverse Polish)</div>
+        <p>Operator ตามหลัง Operand<br>เช่น A B + = A + B</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num q5" style="color:#5a3a00;">5</div>
+      <div class="section-header-text">
+        <h3>Boolean Algebra / ลดวงจรลอจิก</h3>
+        <div class="sub">ลด Boolean Expression, เปรียบเทียบ 5.1 vs 5.2</div>
+      </div>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">5.2) ลดตามวิธีลดเวก (Simplification)</div>
+      <p>ใช้กฎ Boolean Algebra ลด expression ให้ง่ายที่สุด</p>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">5.3) จาก 5.2 และ 5.1 เทียบกัน → 5.2 มีสปั่น เมื่อเทียบกัน</div>
+      <p>โจทย์ให้เปรียบเทียบวิธี 2 วิธีว่าได้ผลเหมือนกันหรือไม่ และ 5.2 ดีกว่าตรงไหน</p>
+    </div>
+
+    <table>
+      <tr><th>กฎ</th><th>สูตร</th></tr>
+      <tr><td>Idempotent</td><td>A + A = A, A · A = A</td></tr>
+      <tr><td>Complement</td><td>A + A' = 1, A · A' = 0</td></tr>
+      <tr><td>De Morgan</td><td>(A·B)' = A' + B', (A+B)' = A'·B'</td></tr>
+      <tr><td>Absorption</td><td>A + AB = A, A(A+B) = A</td></tr>
+      <tr><td>Distribution</td><td>A(B+C) = AB + AC</td></tr>
+    </table>
+
+    <div class="sub-question">
+      <div class="sq-label">5.4) 1 → แปลงถึง 0 / 5.5) 0</div>
+      <p>เกี่ยวกับค่า logic 0 และ 1 ในวงจร / output ของ gate</p>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num q6">6</div>
+      <div class="section-header-text">
+        <h3>Pipeline — D[i] = A[i]*B[i] + A[i]*C[i]</h3>
+        <div class="sub">Pipelined vs Non-Pipelined, Speedup</div>
+      </div>
+    </div>
+
+    <p style="margin-bottom:14px;">โจทย์ให้ operation: <strong class="highlight">D[i] = A[i]*B[i] + A[i]*C[i]</strong> สำหรับ i = 1,2,3,...,7 (i=0 ด้วย)</p>
+
+    <div class="sub-question">
+      <div class="sq-label">6.1) วาดออกมาประมาณนี้ (Pipeline Diagram)</div>
+      <p>Pipeline 3 Segment:</p>
+      <div class="formula-box">
+        Segment 1: R1 ← A[i], R2 ← B[i]  (Load A, B)<br>
+        Segment 2: R3 ← R1 * R2, R4 ← C[i]  (Multiply & Load C)<br>
+        Segment 3: R5 ← R3 + R4  (Add)
+      </div>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">6.2) ความวิธีลดเวลา / 6.1) มาก</div>
+      <p>Pipeline ช่วยให้แต่ละ segment ทำงานพร้อมกัน (Concurrent) แทนที่จะทำทีละขั้น</p>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">6.3) Speedup Formula — สำคัญมาก ⭐</div>
+      <div class="formula-box">
+        Non-Pipelined: τ = n × t_n<br>
+        Pipelined (k stages): τ_p = (k + n - 1) × t_p<br><br>
+        Speedup: S_k = (n × t_n) / ((k + n - 1) × t_p)<br><br>
+        เมื่อ n → ∞: S_k → t_n / t_p = k (ถ้า t_n = k × t_p)
+      </div>
+      <p>ตัวแปร: <span class="tag-chip">n = จำนวน tasks</span> <span class="tag-chip">k = จำนวน stages</span> <span class="tag-chip">t_p = clock cycle ของ pipeline</span></p>
+    </div>
+
+    <div class="tip-box">
+      <div class="icon">📌</div>
+      <p>จาก 6.2 และ 6.1 เทียบกัน — <strong>6.2 ดีกว่า</strong> เพราะไม่ต้องเปรียบเทียบกับ 6.1 เหมือนกัน (Pipeline เร็วกว่า Non-Pipeline)</p>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num q7">7</div>
+      <div class="section-header-text">
+        <h3>Assembly Language</h3>
+        <div class="sub">เขียน Assembly จาก Pseudocode + แปลงเป็นฐาน 16</div>
+      </div>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">โจทย์ (Pseudocode ที่ให้มา)</div>
+      <div class="code-block">
+<span class="var">i</span> = -5, <span class="var">sum</span> = 0<br>
+<span class="kw">while</span> (i ≤ 0) {<br>
+&nbsp;&nbsp;<span class="kw">if</span> (i == -2 || i == -4)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">sum</span> = <span class="var">sum</span> + (-i - i)  <span class="cm">// บวกสองเท่า</span><br>
+&nbsp;&nbsp;<span class="kw">else</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">sum</span> = <span class="var">sum</span> + (-i)<br>
+&nbsp;&nbsp;i = i + 1<br>
+}<br>
+<span class="kw">output</span> = <span class="var">sum</span>
+      </div>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">7.1) เขียนเป็น Assembly (ตัวอย่าง Assembly ที่ให้มา)</div>
+      <div class="code-block">
+<span class="cm">; ตัวอย่าง Assembly โครงสร้าง</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;SUM = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;C = -5<br>
+LOOP: <span class="kw">while</span> C &lt;= 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> C ∈ {9,-2,54}  <span class="cm">; ตามที่โจทย์กำหนด</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SUM = SUM - C<br>
+&nbsp;&nbsp;&nbsp;&nbsp;end if<br>
+&nbsp;&nbsp;&nbsp;&nbsp;C = C + 1<br>
+END: end while
+      </div>
+    </div>
+
+    <div class="sub-question">
+      <div class="sq-label">7.2) แปลงจาก Assembly เป็นฐาน 16 (Hex)</div>
+      <p>แปลงค่าต่างๆ ใน Assembly เป็นเลขฐาน 16:</p>
+      <table>
+        <tr><th>ค่า Decimal</th><th>ค่า Hex (ฐาน 16)</th><th>ค่า Binary</th></tr>
+        <tr><td>0</td><td>0x00</td><td>0000 0000</td></tr>
+        <tr><td>-5</td><td>0xFB (2's complement)</td><td>1111 1011</td></tr>
+        <tr><td>-2</td><td>0xFE</td><td>1111 1110</td></tr>
+        <tr><td>-4</td><td>0xFC</td><td>1111 1100</td></tr>
+      </table>
+      <p style="margin-top:8px;">วิธีแปลง negative → Hex: หา 2's complement แล้วแปลงเป็น Hex</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="icon">💡</div>
+      <p>โจทย์ถามเขียนโปรแกรม + Assembly + แปลงเลขฐาน — <strong>มีเขียน loop แล้วก็ if แปลงเลขฐาน</strong><br>ข้อสอบมีประมาณ 7 ข้อ แล้วอาจจะพูดแต่ละครั้งไม่เหมือนเดิม อย่าถาม!</p>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num q8">8</div>
+      <div class="section-header-text">
+        <h3>Pipeline Hazards (เนื้อหาเพิ่มเติม)</h3>
+        <div class="sub">Major Hazards ใน Pipelined Execution</div>
+      </div>
+    </div>
+
+    <table>
+      <tr><th>ประเภท Hazard</th><th>อธิบาย</th><th>วิธีแก้</th></tr>
+      <tr>
+        <td><strong>Structural Hazard</strong><br>(Resource Conflicts)</td>
+        <td>Hardware ไม่พอให้ทำพร้อมกัน<br>เช่น อ่าน memory 2 ที่พร้อมกัน</td>
+        <td>เพิ่ม Hardware / Stall</td>
+      </tr>
+      <tr>
+        <td><strong>Data Hazard</strong><br>(Data Dependency)</td>
+        <td>Instruction ต้องการผลจาก instruction ก่อน<br>ที่ยังคำนวณไม่เสร็จ</td>
+        <td>Forwarding / Stall</td>
+      </tr>
+      <tr>
+        <td><strong>Control Hazard</strong><br>(Branch Address)</td>
+        <td>Branch/Jump ทำให้ไม่รู้ว่า PC จะไปที่ไหน</td>
+        <td>Branch Prediction / Flush</td>
+      </tr>
+    </table>
+
+    <div class="sub-question">
+      <div class="sq-label">ตัวอย่าง Data Hazard</div>
+      <div class="code-block">
+R1 ← R2 + R3  <span class="cm">; ยังไม่เสร็จ</span><br>
+R4 ← R1 + 1   <span class="cm">; ต้องการ R1 แต่ยังไม่ได้</span>
+      </div>
+      <p style="margin-top:8px;">แก้ด้วย <strong>Forwarding</strong>: ส่งผลจาก ALU ไปตรงๆ โดยไม่ต้องรอ writeback</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="icon">🔴</div>
+      <p>Hazards ใน pipelines อาจทำให้ต้อง <strong>Stall</strong> pipeline (หยุดรอ) — ตรวจสอบด้วย Detect Hazard Logic</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    สรุปแนวข้อสอบ Computer Organization · ครบทุกข้อตามแนวที่ระบุ · ขอให้โชคดีในการสอบ! 🎯
+  </div>
+
+</div>
+</body>
+</html>
